@@ -1,0 +1,32 @@
+<div class="row row justify-content-md-center">
+    <div class="col-md-auto">
+        <h3>Lista de usuarios</h3>
+    </div>
+</div>
+<table *ngIf="listUsers.length > 0" class="table table-hover mt-3">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Edad</td>
+            <td>Email</td>
+            <td>Fecha creación</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of listUsers">
+            <td><a [routerLink]="['/view', user.id]">{{user.name}}</a></td>
+            <td>{{user.age}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created | date:'dd/MM/yyyy'}}</td>
+            <td style="width: 10%;"><button [routerLink]="['/edit', user.id]"
+                    class="btn btn-primary btn-sm float-end">Editar</button></td>
+            <td style="width: 10%;"><button (click)="deleteUser(user.id)"
+                    class="btn btn-danger btn-sm float-end">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="listUsers.length == 0" class="rox mt-5">
+    No hay usuarios para mostrar
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="user !== undefined">
+    <h3>{{user.name}}</h3>
+    <h5>{{user.email}}</h5>
+    <ul>
+        <li>{{user.age}}</li>
+        <li>{{user.created | date:'dd/MM/yyyy'}}</li>
+    </ul>
+</div>
