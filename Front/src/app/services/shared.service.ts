@@ -22,17 +22,22 @@ export class SharedService {
   }
 
   getSharedUser(id: any): User {
-    const userIndex = this.users.findIndex((user => user.id == id));
+    const userIndex = this.users.findIndex((user => user.id === id));
     return this.users[userIndex];
   }
 
   updateSharedUser(id: any, user: User) {
-    const userIndex = this.users.findIndex((user => user.id == id));
+    const userIndex = this.users.findIndex((user => user.id === id));
     this.users[userIndex] = user;
   }
 
   deleteSharedUser(id: any) {
-    this.users = this.users.filter(obj => obj.id !== id);
+    console.log(this.users);
+    console.log(
+    this.users.findIndex((user => user.id === id))
+    );
+    this.users = this.users.filter(user => user.id !== id);
+    console.log(this.users);
   }
 
 }

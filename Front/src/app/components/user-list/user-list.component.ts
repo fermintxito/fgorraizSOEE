@@ -40,7 +40,8 @@ export class UserListComponent implements OnInit {
         console.log(error);
       });
     } else {
-      this._sharedService.deleteSharedUser(id);
+      this._sharedService.deleteSharedUser(id);      
+      this.getUsers();
     }
   }
 }

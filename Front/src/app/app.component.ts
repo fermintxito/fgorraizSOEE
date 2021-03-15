@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedEntity } from './interfaces/SharedEntity';
-import { User } from './interfaces/User';
 import { SharedService } from './services/shared.service';
 
 @Component({
