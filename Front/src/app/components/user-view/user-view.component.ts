@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interfaces/User';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class UserViewComponent implements OnInit {
   id: number;
 
 
-  constructor(private aRoute: ActivatedRoute, private _userService: UserService) {
+  constructor(private aRoute: ActivatedRoute, private _userService: UserService, private _sharedService: SharedService) {
     this.id = +this.aRoute.snapshot.paramMap.get('id')!;
   }
 
@@ -22,11 +23,15 @@ export class UserViewComponent implements OnInit {
   }
 
   getUser() {
-    this._userService.getUser(this.id).subscribe(data => {
-      this.user = data;
-    }, error => {
-      console.log(error);
-    });
+    if (this._sharedService.isOnline()) {
+      this._userService.getUser(this.id).subscribe(data => {
+        this.user = data;
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.user = this._sharedService.getSharedUser(this.id);
+    }
   }
 
 }

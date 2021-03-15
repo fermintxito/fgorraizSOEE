@@ -10,6 +10,16 @@
                 <a class="nav-link" routerLink="/signin">Sign In</a>
                 <a class="nav-link" routerLink="/list">Lista</a>
             </div>
+            <!-- Checked switch -->
+            <div class="form-check form-switch">
+                <input (change)="updateOnline($event)" class="form-check-input" type="checkbox" id="onlineSwitch" checked />
+                <label class="form-check-label" for="onlineSwitch">Online</label>
+            </div>
         </div>
+
+
     </div>
+
+
+
 </nav>

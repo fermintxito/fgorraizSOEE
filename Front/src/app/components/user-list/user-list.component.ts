@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,37 +9,38 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  @Input('data') isOnline: any;
+  listUsers: User[] = [];
 
-  listUsersOffline: User[] = [
-    { id: 1, name: 'Fermin1', age: 35, email: 'fermin1.gorraiz@gmail.com', created: new Date(), password: '1234' },
-    { id: 2, name: 'Fermin2', age: 35, email: 'fermin2.gorraiz@gmail.com', created: new Date(), password: '1234' },
-    { id: 3, name: 'Fermin3', age: 35, email: 'fermin3.gorraiz@gmail.com', created: new Date(), password: '1234' }
-  ];
-
-  listUsers: User[] = [
-  ];
-
-  constructor(private _userService: UserService) { }
+  constructor(private _sharedService: SharedService, private _userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
   getUsers() {
-    this._userService.getListUsers().subscribe(data => {
-      console.log(data);
-      this.listUsers = data;
-    }, error => {
-      console.log(error);
-    })
+    if (this._sharedService.isOnline()) {
+      this._userService.getListUsers().subscribe(data => {
+        console.log(data);
+        this.listUsers = data;
+      }, error => {
+        console.log(error);
+      })
+    } else {
+      this.listUsers = this._sharedService.getAllSharedUsers();
+    }
   }
 
   deleteUser(id: any) {
-    console.log(id);
-    this._userService.deleteUser(id).subscribe(data => {
-      this.getUsers();
-    }, error => {
-      console.log(error);
-    });
+    if (this._sharedService.isOnline()) {
+      console.log(id);
+      this._userService.deleteUser(id).subscribe(data => {
+        this.getUsers();
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this._sharedService.deleteSharedUser(id);
+    }
   }
 }
