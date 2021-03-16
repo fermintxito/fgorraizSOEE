@@ -42,6 +42,12 @@ public class UserJdbcRepository {
 				new BeanPropertyRowMapper<User>(User.class));
 	}
 
+	@SuppressWarnings("deprecation")
+	public User findByEmail(String email) {
+		return jdbcTemplate.queryForObject("select * from users where email=?", new Object[] { email },
+				new BeanPropertyRowMapper<User>(User.class));
+	}
+
 	public int deleteById(Integer id) {
 		return jdbcTemplate.update("delete from users where id=?", new Object[] { id });
 	}

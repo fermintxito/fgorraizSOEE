@@ -29,10 +29,10 @@ public class FgorraizSoeeApplication implements CommandLineRunner {
 		logger.info("User id 1 -> {}", repository.findById(1));
 
 		logger.info("Inserting -> {}",
-				repository.insert(new User(10010, "Fermin3", 40, "fermin3.gorraiz@gmail.com", "1234", new Date())));
+				repository.insert(new User(10010, "Fermin10010", 40, "fermin10010@gmail.com", "1234", new Date())));
 
 		logger.info("Update 10003 -> {}",
-				repository.update(new User(1, "Name-Updated", 10, "editmail@gmail.com", "new Password", new Date())));
+				repository.update(new User(1, "Name-Updated", 10, "editmail@gmail.com", "newPassword", new Date())));
 
 		logger.info("Delete id 2");
 		repository.deleteById(2);
