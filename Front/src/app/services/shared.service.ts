@@ -26,6 +26,11 @@ export class SharedService {
     return this.users[userIndex];
   }
 
+  getSharedUserByEmail(email: any): User {
+    const userIndex = this.users.findIndex((user => user.email === email));
+    return this.users[userIndex];
+  }
+
   updateSharedUser(id: any, user: User) {
     const userIndex = this.users.findIndex((user => user.id === id));
     this.users[userIndex] = user;

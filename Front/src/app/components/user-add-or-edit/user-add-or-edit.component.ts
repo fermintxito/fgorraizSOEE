@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/User';
@@ -16,8 +16,6 @@ export class UserAddOrEditComponent implements OnInit {
   accion = 'Registrar';
   id = 0;
   user: User | undefined;
-
-  @Input() item: string | undefined;
 
   constructor(private fb: FormBuilder,
     private _userService: UserService,

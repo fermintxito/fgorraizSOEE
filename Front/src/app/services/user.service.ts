@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get(this.myAppUrl + this.myApiUrl + id);
   }
 
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get(this.myAppUrl + this.myApiUrl + "email/" + email);
+  }
+
   saveUser(user: User): Observable<any> {
     return this.http.post((this.myAppUrl + this.myApiUrl), user);
   }

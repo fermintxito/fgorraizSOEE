@@ -3,21 +3,28 @@
         <h3>Log In</h3>
     </div>
 </div>
-<div class="row mt-3 row justify-content-md-center">
-    <div class="col-lg-6">
-        <!-- Login Form -->
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingEmail" placeholder="nombre@ejemplo.com">
-            <label for="floatingEmail">Email</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+<form [formGroup]="logInUser" (ngSubmit)="submit()">
+    <div class="row row justify-content-md-center">
+        <div *ngIf="notUser" class="alert alert-danger col-lg-6">
+            <strong>Atención!</strong> El usuario o la contraseña son incorrectas.
         </div>
     </div>
-</div>
-<div class="row row justify-content-md-center">
-    <div class="col-lg-6">
-        <button type="button" class="btn btn-secondary">Log In</button>
+    <div class="row mt-3 row justify-content-md-center">
+        <div class="col-lg-6">
+            <!-- Login Form -->
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" formControlName="email" id="floatingEmail">
+                <label for="floatingEmail">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" formControlName="password" id="floatingPassword">
+                <label for="floatingPassword">Password</label>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row row justify-content-md-center">
+        <div class="col-lg-6">
+            <button type="submit" [disabled]="logInUser.invalid" class="btn btn-secondary">Log In</button>
+        </div>
+    </div>
+</form>
